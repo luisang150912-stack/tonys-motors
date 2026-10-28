@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101317">
+  <meta name="description" content="Tony's Motors: reparación y mantenimiento de maquinaria agrícola y forestal, motores de 2 y 4 tiempos en Tapalpa, Jalisco.">
+  <title>Tony's Motors | Reparación de maquinaria</title>
+  <style>
+    :root {
+      --bg: #0d1014;
+      --panel: #15191f;
+      --panel-soft: #1b2027;
+      --gold: #d49a22;
+      --gold-light: #f7d76b;
+      --text: #f6f4ee;
+      --muted: #b8bbc1;
+      --line: rgba(212,154,34,.32);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 80% 0%, rgba(212,154,34,.09), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    .top-line { height: 3px; background: linear-gradient(90deg, #8b5c0b, var(--gold-light), #a86d10, var(--gold-light)); }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(13,16,20,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .08em; }
+    .brand-mark {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: grid; place-items: center; color: #171717;
+      background: linear-gradient(110deg, #b8780c, #ffe875 42%, #c98212 72%, #f9d34f);
+      font-size: 22px; font-weight: 900;
+      box-shadow: 0 0 24px rgba(212,154,34,.14);
+    }
+    .brand span { color: var(--gold-light); }
+    .nav-links { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: .93rem; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 12px 18px; border-radius: 8px; font-weight: 750;
+      border: 1px solid var(--gold); transition: transform .2s, background .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: linear-gradient(110deg, #bd7c12, #f0c34e); color: #17130a; border: 0; }
+    .btn-outline { color: var(--gold-light); background: transparent; }
+    .hero { padding: 88px 0 78px; overflow: hidden; position: relative; }
+    .hero::after {
+      content: ""; position: absolute; width: 460px; height: 460px; right: -180px; top: 20px;
+      border: 1px solid rgba(212,154,34,.2); border-radius: 50%;
+      box-shadow: 0 0 0 35px rgba(212,154,34,.025), 0 0 0 75px rgba(212,154,34,.02);
+      pointer-events: none;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 55px; position: relative; z-index: 1; }
+    .eyebrow { color: var(--gold-light); text-transform: uppercase; letter-spacing: .19em; font-size: .78rem; font-weight: 800; }
+    h1 { margin: 18px 0 18px; font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: .98; letter-spacing: -.055em; }
+    h1 span { display: block; color: var(--gold); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 590px; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-card {
+      min-height: 340px; padding: 34px; border-radius: 22px; position: relative; overflow: hidden;
+      background: linear-gradient(145deg, #20252c, #111419 68%);
+      border: 1px solid var(--line);
+      box-shadow: 0 25px 70px rgba(0,0,0,.28);
+    }
+    .hero-card::before { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(247,215,107,.35); border-radius: 50%; right: -50px; top: -55px; }
+    .hero-card::after { content: ""; position: absolute; width: 150px; height: 150px; border: 1px solid rgba(247,215,107,.2); border-radius: 50%; right: -20px; top: -25px; }
+    .engine-icon { font-size: 4rem; line-height: 1; margin-bottom: 30px; filter: grayscale(1); }
+    .hero-card h2 { font-size: 1.65rem; margin: 0 0 8px; }
+    .hero-card p { font-size: .98rem; margin: 0; }
+    .hero-card .gold-rule { margin: 22px 0; }
+    .gold-rule { height: 3px; width: 64px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 9px; }
+    .stats { border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.018); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); }
+    .stat { padding: 24px 18px; text-align: center; border-right: 1px solid rgba(255,255,255,.08); }
+    .stat:last-child { border-right: 0; }
+    .stat strong { display: block; color: var(--gold-light); font-size: 1rem; }
+    .stat span { color: var(--muted); font-size: .88rem; }
+    section { padding: 84px 0; }
+    .section-head { max-width: 680px; margin-bottom: 36px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.035em; line-height: 1.1; margin: 10px 0 14px; }
+    .section-head p { color: var(--muted); margin: 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .service {
+      padding: 28px; border: 1px solid rgba(255,255,255,.09); border-radius: 14px;
+      background: linear-gradient(150deg, var(--panel-soft), #12151a);
+      transition: border-color .2s, transform .2s;
+    }
+    .service:hover { border-color: var(--line); transform: translateY(-4px); }
+    .service-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; margin-bottom: 20px; color: var(--gold-light); background: rgba(212,154,34,.12); font-size: 1.5rem; }
+    .service h3 { margin: 0 0 9px; font-size: 1.2rem; }
+    .service p { margin: 0; color: var(--muted); font-size: .95rem; }
+    .about { background: #11151a; border-top: 1px solid rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.05); }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: center; }
+    .about-visual {
+      min-height: 300px; display: grid; place-items: center; border-radius: 18px;
+      border: 1px solid var(--line); background:
+        linear-gradient(135deg, rgba(212,154,34,.1), transparent 50%),
+        repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,.025) 18px 19px),
+        #171b21;
+    }
+    .monogram { width: 180px; height: 180px; display: grid; place-items: center; border-radius: 50%; border: 2px solid var(--gold); color: var(--gold-light); font-size: 3.3rem; font-weight: 900; letter-spacing: -.08em; box-shadow: inset 0 0 35px rgba(212,154,34,.09), 0 0 40px rgba(212,154,34,.08); }
+    .about-copy h2 { font-size: clamp(2rem,4vw,2.8rem); line-height: 1.1; margin: 12px 0 18px; }
+    .about-copy p { color: var(--muted); }
+    .check-list { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+    .check-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .check-list li::before { content: "✓"; color: var(--gold-light); font-weight: 900; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; }
+    .contact-info h2 { font-size: clamp(2rem,4vw,2.8rem); line-height: 1.1; margin: 12px 0 16px; }
+    .contact-info > p { color: var(--muted); }
+    .contact-list { display: grid; gap: 18px; margin-top: 28px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-item .service-icon { flex: 0 0 44px; width: 44px; height: 44px; margin: 0; font-size: 1.15rem; }
+    .contact-item small { display: block; color: var(--muted); }
+    .contact-item a:hover { color: var(--gold-light); }
+    .contact-panel { padding: 30px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, #1b2027, #12151a); }
+    .contact-panel h3 { margin: 0 0 10px; font-size: 1.45rem; }
+    .contact-panel p { color: var(--muted); margin-top: 0; }
+    .contact-panel .btn { width: 100%; margin-top: 10px; }
+    footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); font-size: .86rem; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .footer-row strong { color: var(--gold-light); letter-spacing: .08em; }
+    @media (max-width: 800px) {
+      .nav-links { gap: 14px; }
+      .nav-links a:not(.btn) { display: none; }
+      .hero { padding: 64px 0; }
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+      .hero-card { min-height: auto; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service { padding: 24px; }
+      section { padding: 64px 0; }
+      .about-visual { min-height: 230px; }
+      .monogram { width: 140px; height: 140px; font-size: 2.7rem; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .brand { font-size: .88rem; }
+      .brand-mark { width: 38px; height: 38px; }
+      .nav { min-height: 66px; }
+      .nav .btn { padding: 10px 12px; font-size: .84rem; }
+      .hero-actions .btn { width: 100%; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.08); padding: 16px; }
+      .stat:last-child { border-bottom: 0; }
+      .contact-panel { padding: 23px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Tony's Motors, inicio">
+        <span class="brand-mark">TM</span>
+        <span>TONY'S <span>MOTORS</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Especialidad</a>
+        <a href="#contacto">Contacto</a>
+        <a class="btn btn-primary" href="tel:+523411701494">Llamar ahora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Servicio técnico · Tapalpa, Jalisco</div>
+          <h1>TONY'S <span>MOTORS</span></h1>
+          <p>Reparación y mantenimiento de maquinaria agrícola y forestal. Servicio para motores de 2 y 4 tiempos, con atención enfocada en el funcionamiento y cuidado de tus equipos.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:+523411701494">☎ Llamar al 341 170 1494</a>
+            <a class="btn btn-outline" href="#servicios">Conocer servicios</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Especialidad del taller">
+          <div class="engine-icon" aria-hidden="true">⚙</div>
+          <div class="eyebrow">Nuestra especialidad</div>
+          <h2>Maquinaria lista para trabajar</h2>
+          <div class="gold-rule"></div>
+          <p>Atención a equipos de uso agrícola y forestal, desde el mantenimiento preventivo hasta la reparación correctiva.</p>
+        </aside>
+      </div>
+    </section>
+
+    <div class="stats">
+      <div class="container stats-grid">
+        <div class="stat"><strong>Motores de 2 y 4 tiempos</strong><span>Servicio especializado</span></div>
+        <div class="stat"><strong>Preventivo y correctivo</strong><span>Cuidado y reparación</span></div>
+        <div class="stat"><strong>Tapalpa, Jalisco</strong><span>Atención local</span></div>
+      </div>
+    </div>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Qué hacemos</div>
+          <h2>Servicios para mantener tus equipos en marcha</h2>
+          <p>Soluciones de mantenimiento y reparación para maquinaria agrícola y forestal.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service">
+            <div class="service-icon" aria-hidden="true">⚙</div>
+            <h3>Mantenimiento preventivo</h3>
+            <p>Revisión y mantenimiento periódico para ayudar a conservar el rendimiento de la maquinaria y reducir fallas evitables.</p>
+          </article>
+          <article class="service">
+            <div class="service-icon" aria-hidden="true">🔧</div>
+            <h3>Mantenimiento correctivo</h3>
+            <p>Diagnóstico y reparación de fallas para recuperar el funcionamiento de los equipos.</p>
+          </article>
+          <article class="service">
+            <div class="service-icon" aria-hidden="true">🚚</div>
+            <h3>Transporte de maquinaria</h3>
+            <p>Servicio de transporte de máquinas y apoyo para su traslado de regreso, sujeto a coordinación previa.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="nosotros">
+      <div class="container about-grid">
+        <div class="about-visual" aria-hidden="true"><div class="monogram">TM</div></div>
+        <div class="about-copy">
+          <div class="eyebrow">Tony's Motors</div>
+          <h2>Conocimiento técnico para tu maquinaria</h2>
+          <div class="gold-rule"></div>
+          <p>Mi nombre es <strong>Antonio González</strong>, técnico en reparación de maquinaria de 2 y 4 tiempos. Ofrezco servicios para maquinaria agrícola y forestal en Tapalpa, Jalisco y sus alrededores.</p>
+          <ul class="check-list">
+            <li>Mantenimiento preventivo y correctivo.</li>
+            <li>Atención a motores de 2 y 4 tiempos.</li>
+            <li>Coordinación de transporte de maquinaria y regreso.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <div class="eyebrow">Hablemos de tu equipo</div>
+          <h2>Solicita información o servicio</h2>
+          <p>Comunícate para explicar qué equipo necesitas revisar y coordinar la atención.</p>
+          <div class="contact-list">
+            <div class="contact-item">
+              <div class="service-icon" aria-hidden="true">☎</div>
+              <div><small>Teléfono</small><a href="tel:+523411701494">341-170-1494</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="service-icon" aria-hidden="true">✉</div>
+              <div><small>Correo electrónico</small><a href="mailto:luisang150912@gmail.com">luisang150912@gmail.com</a></div>
+            </div>
+            <div class="contact-item">
+              <div class="service-icon" aria-hidden="true">⌖</div>
+              <div><small>Dirección</small><span>Carretera Tapalpa–San Gabriel 117,<br>49340 Tapalpa, Jalisco</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-panel">
+          <h3>¿Necesitas reparar una máquina?</h3>
+          <p>Contacta directamente a Tony's Motors. Puedes llamar o enviar un correo con los detalles de tu equipo y la falla que presenta.</p>
+          <a class="btn btn-primary" href="tel:+523411701494">☎ Llamar ahora</a>
+          <a class="btn btn-outline" href="mailto:luisang150912@gmail.com?subject=Consulta%20de%20servicio%20-%20Tony's%20Motors">Enviar correo</a>
+          <a class="btn btn-outline" target="_blank" rel="noopener noreferrer" href="https://www.google.com/maps/search/?api=1&query=Carretera%20Tapalpa-San%20Gabriel%20117%2C%2049340%20Tapalpa%2C%20Jalisco">Ver ubicación en Google Maps</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <strong>TONY'S MOTORS</strong>
+      <span>© <span id="year"></span> Tony's Motors · Tapalpa, Jalisco</span>
+      <a href="#inicio">Volver al inicio ↑</a>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
