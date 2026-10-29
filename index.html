@@ -134,6 +134,16 @@
     footer { padding: 24px 0; border-top: 1px solid rgba(255,255,255,.08); color: var(--muted); font-size: .86rem; }
     .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
     .footer-row strong { color: var(--gold-light); letter-spacing: .08em; }
+    .booking { background: linear-gradient(180deg, rgba(212,154,34,.055), transparent); border-top: 1px solid rgba(255,255,255,.05); }
+    .contact-panel label { display: block; color: var(--gold-light); font-size: .88rem; font-weight: 650; margin: 14px 0 6px; }
+    .contact-panel input, .contact-panel select, .contact-panel textarea {
+      display: block; width: 100%; padding: 12px 13px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.14); background: #0d1014; color: var(--text);
+      font: inherit; outline: none;
+    }
+    .contact-panel input:focus, .contact-panel select:focus, .contact-panel textarea:focus { border-color: var(--gold); }
+    .contact-panel textarea { resize: vertical; }
+    .contact-panel .form-note { display: block; color: var(--muted); font-size: .78rem; margin-top: 14px; }
     @media (max-width: 800px) {
       .nav-links { gap: 14px; }
       .nav-links a:not(.btn) { display: none; }
@@ -187,7 +197,8 @@
           <h1>TONY'S <span>MOTORS</span></h1>
           <p>Reparación y mantenimiento de maquinaria agrícola y forestal. Servicio para motores de 2 y 4 tiempos, con atención enfocada en el funcionamiento y cuidado de tus equipos.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="tel:+523411701494">☎ Llamar al 341 170 1494</a>
+            <a class="btn btn-primary" href="#agendar">Agendar servicio</a>
+            <a class="btn btn-outline" href="https://wa.me/523411701494?text=Hola%20Tony's%20Motors%2C%20quiero%20solicitar%20un%20servicio." target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <a class="btn btn-outline" href="#servicios">Conocer servicios</a>
           </div>
         </div>
@@ -253,6 +264,45 @@
       </div>
     </section>
 
+    <section class="booking" id="agendar">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <div class="eyebrow">Agenda tu servicio</div>
+          <h2>¿Tu maquinaria necesita atención?</h2>
+          <p>Cuéntanos qué equipo tienes y qué servicio necesitas. Completa la solicitud y se abrirá WhatsApp con los detalles para coordinar la cita.</p>
+          <ul class="check-list">
+            <li>Solicita mantenimiento preventivo o correctivo.</li>
+            <li>Indica el tipo de máquina y la falla que presenta.</li>
+            <li>Propón una fecha para coordinar la atención.</li>
+          </ul>
+        </div>
+        <form class="contact-panel" id="appointment-form">
+          <h3>Solicitar una cita</h3>
+          <p>La cita se confirma directamente con Tony's Motors.</p>
+          <label for="client-name">Nombre</label>
+          <input id="client-name" name="name" type="text" placeholder="Tu nombre" required>
+          <label for="client-phone">Teléfono</label>
+          <input id="client-phone" name="phone" type="tel" placeholder="Tu número de contacto">
+          <label for="equipment">Tipo de maquinaria</label>
+          <input id="equipment" name="equipment" type="text" placeholder="Ej. motosierra, desbrozadora, tractor" required>
+          <label for="service-type">Servicio requerido</label>
+          <select id="service-type" name="service" required>
+            <option value="" disabled selected>Selecciona un servicio</option>
+            <option>Mantenimiento preventivo</option>
+            <option>Mantenimiento correctivo / reparación</option>
+            <option>Transporte de maquinaria</option>
+            <option>Otro / necesito orientación</option>
+          </select>
+          <label for="preferred-date">Fecha preferida</label>
+          <input id="preferred-date" name="date" type="date">
+          <label for="details">Describe brevemente la falla o solicitud</label>
+          <textarea id="details" name="details" rows="3" placeholder="¿Qué problema presenta la máquina?"></textarea>
+          <button class="btn btn-primary" type="submit">Enviar solicitud por WhatsApp</button>
+          <a class="btn btn-outline" href="https://wa.me/523411701494?text=Hola%20Tony's%20Motors%2C%20quiero%20consultar%20por%20un%20servicio." target="_blank" rel="noopener noreferrer">Abrir WhatsApp directamente</a>
+          <small class="form-note">No se reserva automáticamente una fecha. Al enviar, se abrirá WhatsApp para que revises y envíes la solicitud.</small>
+        </form>
+      </div>
+    </section>
     <section id="contacto">
       <div class="container contact-grid">
         <div class="contact-info">
@@ -293,7 +343,23 @@
     </div>
   </footer>
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();\n    const appointmentForm = document.getElementById("appointment-form");
+    appointmentForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const formData = new FormData(appointmentForm);
+      const fields = [
+        ["Nombre", formData.get("name")],
+        ["Teléfono", formData.get("phone") || "No proporcionado"],
+        ["Maquinaria", formData.get("equipment")],
+        ["Servicio", formData.get("service")],
+        ["Fecha preferida", formData.get("date") || "Por coordinar"],
+        ["Detalles", formData.get("details") || "Sin detalles adicionales"]
+      ];
+      const message = "Hola Tony's Motors, quiero solicitar una cita:\\n\\n" +
+        fields.map(([label, value]) => label + ": " + value).join("\\n");
+      window.open("https://wa.me/523411701494?text=" + encodeURIComponent(message), "_blank", "noopener");
+    });
+
   </script>
 </body>
 </html>
